@@ -7,7 +7,7 @@ namespace sdl2_sample
 	App *App::getInstance()
 	{
 		static App app;
-		  return &app;
+		return &app;
 	}
 
 	App::App()
@@ -96,15 +96,8 @@ namespace sdl2_sample
 		}
 
 		SDL_QueryTexture(this->sdl_texture, NULL, NULL, &this->texture_width, &this->texture_height);
-
-		int w = 0;
-		int h = 0;
-		SDL_GetRendererOutputSize(this->sdl_renderer, &w, &h);
-
-		float scalex = 1.0f + 1.0f - (this->texture_width / w);
-		float scaley = 1.0f + 1.0f - (this->texture_height / h);
-		SDL_RenderSetScale(this->sdl_renderer, scalex, scaley);
-
+        SDL_RenderSetLogicalSize(this->sdl_renderer, this->texture_width, this->texture_height);
+        
 		return 0;
 	}
 
@@ -185,9 +178,34 @@ namespace sdl2_sample
 		return 0;
 	}
 
-	int App::update()
+	int App::update(SDL_Event * event)
 	{
-		this->width_pos -= 4;
+		int movex = 0;
+		int movey = 0;
+		if (event->type == SDL_FINGERMOTION)
+		{
+		    SDL_TouchFingerEvent *fe = &event->tfinger;
+
+			if ((fe->x + fe->dx) < 0.4)
+			{
+				movex = 4;
+			}
+			else if ((fe->x + fe->dx) > 0.6)
+			{
+				movex = -4;
+			}
+
+			if ((fe->y + fe->dy) < 0.4)
+			{
+				movey = 4;
+			}
+			else if ((fe->y + fe->dy) > 0.6)
+			{
+				movey = -4;
+			}
+		}
+
+		this->width_pos += movex;
 		if (this->width_pos > this->texture_width)
 		{
 			this->width_pos = 0;
@@ -197,7 +215,7 @@ namespace sdl2_sample
 			this->width_pos = this->texture_width;
 		}
 
-		this->height_pos -= 4;
+		this->height_pos += movey;
 		if (this->height_pos > this->texture_height)
 		{
 			this->height_pos = 0;
@@ -212,24 +230,29 @@ namespace sdl2_sample
 
 	int App::messageLoop()
 	{
+	    Uint32 interval = 1000 / 60;
 		SDL_Event event;
 		Uint32 now = SDL_GetTicks();
-		Uint32 timeout = now + 17;
+		Uint32 timeout = now + interval;
 
 		while (true)
 		{
 			SDL_PollEvent(&event);
-			if (event.type == SDL_FINGERUP)
+			if (event.type == SDL_MULTIGESTURE)
 			{
-				break;
+				SDL_MultiGestureEvent *ge = &event.mgesture;			
+				if (ge->numFingers > 2)
+				{
+				    break;
+				}
 			}
 
 			now = SDL_GetTicks();
 			if (SDL_TICKS_PASSED(now, timeout))
 			{
-				this->update();
+				this->update(&event);
 				this->draw();
-				timeout = now + 17;
+				timeout = now + interval;
 			}
 		}
 

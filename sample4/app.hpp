@@ -25,7 +25,7 @@ namespace sdl2_sample
         int loadImage();
         int drawMap();
         int draw();
-        int update();
+        int update(SDL_Event *event);
         int messageLoop();
 
     public:
