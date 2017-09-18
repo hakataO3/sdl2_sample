@@ -18,7 +18,7 @@ namespace app_sdl
 	int AppSDLttf::openFont(const char *fontName, const int fontSize)
 	{
 		this->font = TTF_OpenFont(fontName, fontSize);
-		
+
 		return 0;
 	}
 
@@ -49,7 +49,7 @@ namespace app_sdl
 		{
 			return TTF_RenderUTF8_Blended(this->font, text, this->color);
 		}
-		
+
 		return NULL;
 	}
 }

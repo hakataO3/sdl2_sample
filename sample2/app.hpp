@@ -8,10 +8,10 @@ namespace sdl2_sample
 {
 	class App final
 	{
-	  private:
+	private:
 		app_sdl::AppSDLttf *font;
 		int posY;
-		
+
 		App() = default;
 		App(const App&) = delete;
 		App& operator=(const App&) = delete;
@@ -27,7 +27,7 @@ namespace sdl2_sample
 		int draw(SDL_Event *event);
 		int messageLoop();
 
-	  public:
+	public:
 		~App() = default;
 		static App *getInstance();
 		int run();

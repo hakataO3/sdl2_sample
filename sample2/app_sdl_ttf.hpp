@@ -7,14 +7,14 @@ namespace app_sdl
 {
 	class AppSDLttf
 	{
-	  private:
+	private:
 		TTF_Font *font;
 		SDL_Color color;
 
 		int openFont(const char *fontName, const int fontSize);
 		int closeFont();
 
-	  public:
+	 public:
 		AppSDLttf() = delete;
 		AppSDLttf(const char *fontName, const int fontSize);
 		~AppSDLttf();

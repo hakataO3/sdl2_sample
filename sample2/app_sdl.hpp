@@ -6,7 +6,7 @@ namespace app_sdl
 {
 	class AppSDL final
 	{
-	  private:
+	private:
 		SDL_Window *window;
 		SDL_Renderer *renderer;
 
@@ -16,7 +16,7 @@ namespace app_sdl
 		AppSDL(AppSDL&&) = delete;
 		AppSDL& operator=(AppSDL&&) = delete;
 
-	  public:
+	public:
 		~AppSDL();
 		static AppSDL *getInstance();
 		int initialize();

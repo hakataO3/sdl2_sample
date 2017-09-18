@@ -19,13 +19,13 @@ namespace sdl2_sample
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawLine(renderer, 10, 10, 400, 400);
-	
+
 		SDL_Rect rect = (SDL_Rect){100,100,100,100};
 		SDL_RenderFillRect(renderer, &rect);
-	
+
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 		SDL_RenderDrawRect(renderer, &rect);
-	
+
 		SDL_RenderPresent(renderer);
 
 		return 0;
@@ -34,7 +34,7 @@ namespace sdl2_sample
 	int App::messageLoop()
 	{
 		SDL_Event event;
-		
+
 		while (true)
 		{
 			SDL_PollEvent(&event);
@@ -42,20 +42,20 @@ namespace sdl2_sample
 			{
 				break;
 			}
-				
+
 			this->draw();
 		}
 
 		return 0;
 	}
-	
+
 	int App::run()
 	{
 		app_sdl::AppSDL *sdl = app_sdl::AppSDL::getInstance();
 		sdl->initialize();
 		this->messageLoop();
 		sdl->finalize();
-		
+
 		return 0;
 	}
 }

@@ -96,8 +96,8 @@ namespace sdl2_sample
 		}
 
 		SDL_QueryTexture(this->sdl_texture, NULL, NULL, &this->texture_width, &this->texture_height);
-        SDL_RenderSetLogicalSize(this->sdl_renderer, this->texture_width, this->texture_height);
-        
+		SDL_RenderSetLogicalSize(this->sdl_renderer, this->texture_width, this->texture_height);
+
 		return 0;
 	}
 
@@ -184,7 +184,7 @@ namespace sdl2_sample
 		int movey = 0;
 		if (event->type == SDL_FINGERMOTION)
 		{
-		    SDL_TouchFingerEvent *fe = &event->tfinger;
+			SDL_TouchFingerEvent *fe = &event->tfinger;
 
 			if ((fe->x + fe->dx) < 0.4)
 			{
@@ -230,7 +230,7 @@ namespace sdl2_sample
 
 	int App::messageLoop()
 	{
-	    Uint32 interval = 1000 / 60;
+		Uint32 interval = 1000 / 60;
 		SDL_Event event;
 		Uint32 now = SDL_GetTicks();
 		Uint32 timeout = now + interval;
@@ -240,10 +240,10 @@ namespace sdl2_sample
 			SDL_PollEvent(&event);
 			if (event.type == SDL_MULTIGESTURE)
 			{
-				SDL_MultiGestureEvent *ge = &event.mgesture;			
+				SDL_MultiGestureEvent *ge = &event.mgesture;
 				if (ge->numFingers > 2)
 				{
-				    break;
+					break;
 				}
 			}
 

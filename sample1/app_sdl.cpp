@@ -60,7 +60,7 @@ namespace app_sdl
 
 		return 0;
 	}
-	
+
 	SDL_Renderer *AppSDL::getRenderer()
 	{
 		return this->renderer;

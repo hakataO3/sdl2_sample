@@ -6,17 +6,17 @@ namespace sdl2_sample
 {
 	class App final
 	{
-	  private:
+	private:
 		App() = default;
 		App(const App&) = delete;
 		App& operator=(const App&) = delete;
 		App(App&&) = delete;
 		App& operator=(App&&) = delete;
-		
+
 		int draw();
 		int messageLoop();
 
-	  public:
+	public:
 		~App() = default;
 		static App *getInstance();
 		int run();
