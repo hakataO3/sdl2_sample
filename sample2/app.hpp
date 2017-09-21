@@ -21,7 +21,6 @@ namespace sdl2_sample
 		int initialize();
 		int finalize();
 		int resetLocation();
-		char *tos(const int n, char *buff);
 		int put(const char *text);
 		int putRendererInfo();
 		int draw(SDL_Event *event);

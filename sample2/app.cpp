@@ -1,6 +1,5 @@
 #include "app.hpp"
 #include <string>
-#include <cstdlib>
 #include "SDL2/SDL.h"
 #include "app_sdl.hpp"
 #include "app_sdl_ttf.hpp"
@@ -41,12 +40,6 @@ namespace sdl2_sample
 		return 0;
 	}
 
-	char *App::tos(const int n, char *buff)
-	{
-		sprintf(buff, "%d", n);
-		return buff;
-	}
-
 	int App::put(const char *text)
 	{
 		SDL_Renderer *renderer = app_sdl::AppSDL::getInstance()->getRenderer();
@@ -82,28 +75,28 @@ namespace sdl2_sample
 
 		char buff[64];
 		str = "flags=";
-		//str += std::to_string(info.flags);
-		str += this->tos(info.flags, buff);
+		str += std::to_string(info.flags);
 		this->put(str.c_str());
 
 		str = "num_texture_formats=";
-		//str += std::to_string(info.num_texture_formats);
-		str += this->tos(info.num_texture_formats, buff);
+		str += std::to_string(info.num_texture_formats);
 		this->put(str.c_str());
 
-		//str = "texture_formats=";
-		//str += std::to_string(info.texture_formats);
-		//str += this->tos(info.texture_formats, buff);
-		//this->put(str.c_str());
+		str = "texture_formats=";
+		this->put(str.c_str());
+
+		for (int i = 0; i < info.num_texture_formats; i++)
+		{
+			str = " " + std::to_string(i) + " : " +  std::to_string(info.texture_formats[i]);
+			this->put(str.c_str());
+		}
 
 		str = "max_texture_width=";
-		//str += std::to_string(max_tecture_width);
-		str += this->tos(info.max_texture_width, buff);
+		str += std::to_string(info.max_texture_width);
 		this->put(str.c_str());
 
 		str = "max_texture_height=";
-		//str += std::to_string(max_tecture_height);
-		str += this->tos(info.max_texture_height, buff);
+		str += std::to_string(info.max_texture_height);
 		this->put(str.c_str());
 
 		this->put(" ");
